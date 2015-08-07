@@ -1,11 +1,14 @@
 ### read data into R
 data<- read.table("household_power_consumption.txt", header = TRUE, sep = ";", na.strings = "?", nrows = 69516, stringsAsFactors = FALSE)
+
 ### subset data to dates we are interested in
 powerdata<- data[66636:69516, ]
+
 ### transform date and time columns
 powerdata$Date<- as.Date(powerdata$Date, format = "%d/%m/%Y")
 date_time<- paste(as.Date(powerdata$Date), powerdata$Time)
 powerdata$Date_Time<- as.POSIXct(date_time)
+
 ### script to graphically represent selected data and save as png file
 par(mfrow = c(2,2), mar = c(4,4,1,1), oma = c(2,1,2,1), cex = .6)
 with(powerdata, {
